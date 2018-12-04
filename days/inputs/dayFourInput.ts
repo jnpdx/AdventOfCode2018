@@ -1177,7 +1177,7 @@ const dayFourRealInput = [
   "[1518-06-06 23:56] Guard #3271 begins shift"
 ];
 
-export const filtered = dayFourTestInputStrings
+export const filtered = dayFourRealInput
   .map(fullLine => {
     const regex = /\[(.*?)\][ ](.*?)$/gm;
     const split = regex.exec(fullLine);
@@ -1197,18 +1197,16 @@ export const filtered = dayFourTestInputStrings
 export const dayFourInput = filtered
   .sort((a, b) => a.date.valueOf() - b.date.valueOf())
   .map(item => {
-    if (item) {
-      const eventType: GuardEventType = ((input: string) => {
-        if (input == "wakes up") return GuardEventType.WAKE;
-        else if (input == "falls asleep") return GuardEventType.ASLEEP;
-        else return GuardEventType.BEGIN_SHIFT;
-      })(item.event);
-      if (eventType === GuardEventType.BEGIN_SHIFT)
-        guardNumber = Number(item.event.split(" ")[1].slice(1));
-      return {
-        date: item.date,
-        type: eventType,
-        guardNumber
-      } as GuardEvent;
-    }
+    const eventType: GuardEventType = ((input: string) => {
+      if (input == "wakes up") return GuardEventType.WAKE;
+      else if (input == "falls asleep") return GuardEventType.ASLEEP;
+      else return GuardEventType.BEGIN_SHIFT;
+    })(item.event);
+    if (eventType === GuardEventType.BEGIN_SHIFT)
+      guardNumber = Number(item.event.split(" ")[1].slice(1));
+    return {
+      date: item.date,
+      type: eventType,
+      guardNumber
+    } as GuardEvent;
   });
