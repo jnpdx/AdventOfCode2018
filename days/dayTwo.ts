@@ -1,15 +1,5 @@
 import { dayTwoInput } from "./inputs/dayTwoInput";
 
-const dayTwoTestInput = [
-  "abcdef",
-  "bababc",
-  "abbcde",
-  "abcccd",
-  "aabcdd",
-  "abcdee",
-  "ababab"
-];
-
 function letterCounts(input: string) {
   let letterCounts: { [key: string]: number } = {};
   for (let i = 0; i < input.length; i++) {

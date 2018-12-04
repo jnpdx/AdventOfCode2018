@@ -250,3 +250,13 @@ export const dayTwoInput = [
   "evsialkqjducohxzpwycngtjmf",
   "evsialkqydurohxzpwicnxtjnf"
 ];
+
+export const dayTwoTestInput = [
+  "abcdef",
+  "bababc",
+  "abbcde",
+  "abcccd",
+  "aabcdd",
+  "abcdee",
+  "ababab"
+];
