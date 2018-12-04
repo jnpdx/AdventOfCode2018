@@ -3,6 +3,10 @@
     "runner": "yarn tsc && node dist/runner.js"
   },
   "devDependencies": {
+    "@types/moment": "^2.13.0",
     "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "moment": "^2.22.2"
   }
 }
