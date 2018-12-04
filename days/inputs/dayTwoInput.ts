@@ -260,3 +260,13 @@ export const dayTwoTestInput = [
   "abcdee",
   "ababab"
 ];
+
+export const part2TestInput = [
+  "abcde",
+  "fghij",
+  "klmno",
+  "pqrst",
+  "fguij",
+  "axcye",
+  "wvxyz"
+];

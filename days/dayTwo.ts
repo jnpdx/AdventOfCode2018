@@ -36,3 +36,38 @@ export function dayTwoPart1() {
     );
   return twosAndThrees.twos * twosAndThrees.threes;
 }
+
+export function dayTwoPart2() {
+  return dayTwoInput.reduce(
+    (answer, item1) => {
+      const diff = dayTwoInput
+        .map(item2 => compareIds(item1, item2))
+        .filter(item => item.differentChars === 1);
+      if (diff.length !== 0) {
+        return { similarChars: diff[0].similarChars };
+      } else {
+        return answer;
+      }
+    },
+    {
+      similarChars: ""
+    }
+  ).similarChars;
+}
+
+function compareIds(input1: string, input2: string) {
+  //assume the length is the same
+  const length = input1.length;
+  let differentChars = 0;
+  let similarChars = "";
+  for (let i = 0; i < length; i++) {
+    if (input1[i] !== input2[i]) differentChars++;
+    else similarChars += input1[i];
+  }
+  return {
+    input1,
+    input2,
+    differentChars,
+    similarChars
+  };
+}
