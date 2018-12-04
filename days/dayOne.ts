@@ -1,4 +1,4 @@
-import { dayOneInput } from "./dayOneInput";
+import { dayOneInput } from "./inputs/dayOneInput";
 
 export function dayOnePart1() {
   return dayOneInput.reduce(
