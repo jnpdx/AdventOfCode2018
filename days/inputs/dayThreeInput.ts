@@ -10,7 +10,8 @@ export const dayThreeTestInput = [
     x: Number(coordinates[0]),
     y: Number(coordinates[1]),
     width: Number(dimensions[0]),
-    height: Number(dimensions[1])
+    height: Number(dimensions[1]),
+    owner: Number(segments[0].slice(1))
   };
 });
 
@@ -1432,6 +1433,7 @@ export const dayThreeInput = [
     x: Number(coordinates[0]),
     y: Number(coordinates[1]),
     width: Number(dimensions[0]),
-    height: Number(dimensions[1])
+    height: Number(dimensions[1]),
+    owner: Number(segments[0].slice(1))
   };
 });

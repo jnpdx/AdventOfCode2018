@@ -1,6 +1,10 @@
 import { dayThreeInput } from "./inputs/dayThreeInput";
 
 export function dayThreePart1() {
+  return generateClaims().filter(item => item.count >= 2).length;
+}
+
+export function generateClaims() {
   const claims = dayThreeInput.reduce(
     (claims, input) => {
       //cover each of the squares
@@ -13,17 +17,37 @@ export function dayThreePart1() {
         xCoords.forEach(item => fullCoords.push(`(${item},${yCoord})`));
       }
       fullCoords.forEach(item => {
-        claims[item] = claims[item] === undefined ? 1 : claims[item] + 1;
+        claims[item] =
+          claims[item] === undefined
+            ? { count: 1, owners: [input.owner] }
+            : {
+                count: claims[item].count + 1,
+                owners: [...claims[item].owners, input.owner]
+              };
       });
       return claims;
     },
-    {} as { [key: string]: number }
+    {} as { [key: string]: { count: number; owners: number[] } }
   );
-  const mappedClaims = Object.keys(claims)
-    .map(item => ({
-      coordinate: item,
-      count: claims[item]
-    }))
-    .filter(item => item.count >= 2);
-  return mappedClaims.length;
+  return Object.keys(claims).map(coordinate => ({
+    coordinate,
+    count: claims[coordinate].count,
+    owners: claims[coordinate].owners
+  }));
+}
+
+export function dayThreePart2() {
+  const claims = generateClaims();
+  return dayThreeInput.reduce(
+    (singleOwners, item) => {
+      const itemArea = item.width * item.height;
+      const ownedSquares = claims.filter(
+        claim => claim.owners[0] === item.owner && claim.owners.length === 1
+      );
+      if (itemArea === ownedSquares.length)
+        return [...singleOwners, item.owner];
+      else return singleOwners;
+    },
+    [] as number[]
+  );
 }
