@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "runner": "yarn tsc && node dist/runner.js"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.1"
+  }
+}
