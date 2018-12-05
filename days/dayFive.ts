@@ -1,7 +1,6 @@
 import { dayFiveInput, dayFiveTestInput } from "./inputs/dayFiveInput";
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-//const letterPairs: string[] = [];
 
 const letterPairs = alphabet
   .map(letter => `${letter}${letter.toUpperCase()}`)
