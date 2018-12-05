@@ -1,6 +1,6 @@
 import { dayFourInput, GuardEventType } from "./inputs/dayFourInput";
 
-export function dayFourPart1() {
+export function dayFour() {
   const shiftBeginnings = dayFourInput.filter(
     item => item.type === GuardEventType.BEGIN_SHIFT
   );
@@ -70,14 +70,37 @@ export function dayFourPart1() {
 
   const sleepiestGuard = sortedTime[0].guardNumber;
 
+  const sleepiestGuardPairs = guardEventPairs[sleepiestGuard];
+
+  const sleepiestMinute = findSleepiestMinute(sleepiestGuardPairs);
+
+  //run through it for each guard
+  const guardSleepiestMinutes = keys.map(guardKey => {
+    const sleepiestMinute = findSleepiestMinute(guardEventPairs[guardKey]);
+    return {
+      guardNumber: guardKey,
+      sleepiestMinute: sleepiestMinute.index,
+      count: sleepiestMinute.value
+    };
+  });
+
+  const sleepiest = guardSleepiestMinutes.sort((a, b) =>
+    a.count > b.count ? -1 : 1
+  )[0];
+
+  return {
+    part1: sleepiestMinute.index * Number(sleepiestGuard),
+    part2: sleepiest.sleepiestMinute * Number(sleepiest.guardNumber)
+  };
+}
+
+function findSleepiestMinute(sleepiestGuardPairs: EventPair[]) {
   let minutes: number[] = [];
   for (let i = 0; i < 60; i++) {
     minutes.push(0);
   }
 
-  const sleepiestGuardPairs = guardEventPairs[sleepiestGuard];
-
-  for (let pair of sleepiestGuardPairs) {
+  for (const pair of sleepiestGuardPairs) {
     for (let i = pair.fallAsleep; i < pair.awake; i++) {
       minutes[i]++;
     }
@@ -97,9 +120,7 @@ export function dayFourPart1() {
     }
   );
 
-  console.log("Sleepiest minute: " + sleepiestMinute.index);
-
-  return sleepiestMinute.index * Number(sleepiestGuard);
+  return sleepiestMinute;
 }
 
 type EventPair = {
