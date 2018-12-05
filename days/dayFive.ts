@@ -6,17 +6,39 @@ const letterPairs = alphabet
   .map(letter => `${letter}${letter.toUpperCase()}`)
   .concat(alphabet.map(letter => `${letter.toUpperCase()}${letter}`));
 
-export function dayFive() {
-  let currentString = dayFiveTestInput;
+export function dayFivePartOne() {
+  return reactPolymer(dayFiveInput).length;
+}
 
-  for (let i = 0; i < currentString.length - 1; i++) {
-    const testPair = currentString.slice(i, i + 2);
-    if (letterPairs.indexOf(testPair) != -1) {
-      currentString =
-        currentString.substring(0, i) + currentString.substring(i + 2);
-      i = -1;
+function reactPolymer(polymer: string) {
+  let currentString = polymer;
+  let currentLength = currentString.length;
+  while (true) {
+    letterPairs.forEach(
+      pair => (currentString = currentString.replace(new RegExp(pair, "g"), ""))
+    );
+    if (currentString.length == currentLength) break;
+    else {
+      currentLength = currentString.length;
     }
   }
 
-  return currentString.length;
+  return currentString;
+}
+
+export function dayFivePartTwo() {
+  let shortestPolymer = Number.MAX_SAFE_INTEGER;
+
+  alphabet.forEach(letter => {
+    let filteredPolymer = dayFiveInput.replace(
+      new RegExp(`(${letter}|${letter.toUpperCase()})`, "g"),
+      ""
+    );
+
+    const reacted = reactPolymer(filteredPolymer);
+
+    if (reacted.length < shortestPolymer) shortestPolymer = reacted.length;
+  });
+
+  return shortestPolymer;
 }

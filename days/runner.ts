@@ -2,7 +2,7 @@ import { dayOnePart1, dayOnePart2 } from "./dayOne";
 import { dayTwoPart1, dayTwoPart2 } from "./dayTwo";
 import { dayThreePart1, dayThreePart2 } from "./dayThree";
 import { dayFour } from "./dayFour";
-import { dayFive } from "./dayFive";
+import { dayFivePartOne, dayFivePartTwo } from "./dayFive";
 
 // console.log("Day 1:");
 // console.log("Part 1: " + dayOnePart1());
@@ -18,4 +18,5 @@ import { dayFive } from "./dayFive";
 // console.log("Part 1: " + dayFourAnswers.part1);
 // console.log("Part 2: " + dayFourAnswers.part2);
 console.log("Day 5:");
-console.log("Part 1: " + dayFive());
+console.log("Part 1: " + dayFivePartOne());
+console.log("Part 2: " + dayFivePartTwo());
