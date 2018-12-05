@@ -27,18 +27,14 @@ function reactPolymer(polymer: string) {
 }
 
 export function dayFivePartTwo() {
-  let shortestPolymer = Number.MAX_SAFE_INTEGER;
-
-  alphabet.forEach(letter => {
+  return alphabet.reduce((shortest, letter) => {
     let filteredPolymer = dayFiveInput.replace(
       new RegExp(`(${letter}|${letter.toUpperCase()})`, "g"),
       ""
     );
 
     const reacted = reactPolymer(filteredPolymer);
-
-    if (reacted.length < shortestPolymer) shortestPolymer = reacted.length;
-  });
-
-  return shortestPolymer;
+    if (reacted.length < shortest) return reacted.length;
+    return shortest;
+  }, Number.MAX_SAFE_INTEGER);
 }
