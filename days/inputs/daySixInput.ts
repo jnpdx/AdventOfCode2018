@@ -51,7 +51,7 @@ const daySixRealInput = [
   "235, 265",
   "322, 291"
 ];
-export const daySixInput = daySixRealInput.map(item => {
+export const daySixInput = daySixTestInput.map(item => {
   const parts = item.split(", ");
   return {
     x: Number(parts[0]),
