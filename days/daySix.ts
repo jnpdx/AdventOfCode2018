@@ -1,4 +1,4 @@
-import { daySixInput } from "./inputs/daySixInput";
+import { daySixInput, distanceThreshold } from "./inputs/daySixInput";
 
 type Point = {
   x: number;
@@ -40,23 +40,19 @@ export function daySixPart1() {
       point.y == dimensions.max.y
   );
 
-  let duplicates = 0;
+  let totalDistanceCounter = 0;
   //find the closest point to each one:
   const pointsWithDist = allPoints
     .map(point => {
       let closest: Point = { x: -1, y: -1 };
       let closestDistance = Number.MAX_SAFE_INTEGER;
       let duplicate = false;
+      let totalDistance = 0;
       daySixInput.forEach(inputPoint => {
-        // console.log(
-        //   `Calc distance between ${point.x},${point.y} and ${inputPoint.x},${
-        //     inputPoint.y
-        //   }`
-        // );
         const distance =
           Math.abs(inputPoint.x - point.x) + Math.abs(inputPoint.y - point.y);
+        totalDistance += distance;
         if (distance == closestDistance) {
-          duplicates++;
           duplicate = true;
         }
         if (distance < closestDistance) {
@@ -65,10 +61,13 @@ export function daySixPart1() {
           duplicate = false;
         }
       });
+      if (totalDistance < distanceThreshold) totalDistanceCounter++;
+
       return {
         point,
         closestInputPoint: closest,
-        duplicate
+        duplicate,
+        totalDistance
       };
     })
     .filter(i => !i.duplicate)
@@ -89,7 +88,8 @@ export function daySixPart1() {
     }, tally)
     .sort((a, b) => b.count - a.count);
 
-  console.log("Result:");
-  console.log(JSON.stringify(pointsWithDist[0]));
-  return pointsWithDist[0].count;
+  return {
+    part1: pointsWithDist[0].count,
+    part2: totalDistanceCounter
+  };
 }

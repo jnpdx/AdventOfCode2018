@@ -21,5 +21,7 @@ import { daySixPart1 } from "./daySix";
 // console.log("Day 5:");
 // console.log("Part 1: " + dayFivePartOne());
 // console.log("Part 2: " + dayFivePartTwo());
+const daySix = daySixPart1();
 console.log("Day 6:");
-console.log("Part 1: " + daySixPart1());
+console.log("Part 1: " + daySix.part1);
+console.log("Part 2: " + daySix.part2);

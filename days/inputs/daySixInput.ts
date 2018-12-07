@@ -51,10 +51,13 @@ const daySixRealInput = [
   "235, 265",
   "322, 291"
 ];
-export const daySixInput = daySixTestInput.map(item => {
+export const daySixInput = daySixRealInput.map(item => {
   const parts = item.split(", ");
   return {
     x: Number(parts[0]),
     y: Number(parts[1])
   };
 });
+
+export const distanceThreshold =
+  daySixInput.length == daySixTestInput.length ? 32 : 10000;
